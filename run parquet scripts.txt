@@ -1,0 +1,24 @@
+output:tb-bi-dev-data/unprocessed/core/
+
+
+error:tb-bi-nonprod-error-data/dev/core/cycle
+
+
+xsd:tb-nonprod-config/dev/subject_areas/core/
+
+
+keys
+ssh_dev_orch
+parquet
+
+python3 parquet.py -s core -e dev -x True -k header
+
+
+show_s3_files -s core -e dev keys
+ssh_dev_orch
+parquet
+
+python3 parquet.py -s core -e dev -x True -k header
+
+
+show_s3_files -s core -e dev
