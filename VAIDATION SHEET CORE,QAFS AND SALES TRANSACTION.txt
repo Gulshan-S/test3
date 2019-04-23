@@ -1,0 +1,66 @@
+****************************CORE VALIDATION***********************
+1.Check dw_day for latest run
+select dw_day from tbcdb.time_day_dim where busidaydt='2018-12-16'
+
+2.Check data-lake for latest run
+select count(*),run_cycle from bi_lake_uat.core_header
+group by run_cycle order by run_cycle DESC
+
+3.Check fact table data for latest runs
+
+select 'TBC_CORE_ITEM_RESULT_FACT' as table_name,count(*),dw_day from tbcdb.TBC_CORE_ITEM_RESULT_FACT  group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_SPECIAL_ITEM_RESULT_FACT' as table_name,count(*),dw_day from tbcdb.TBC_CORE_SPECIAL_ITEM_RESULT_FACT group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_DEPT_SCORE_FACT'as table_name,count(*),dw_day from tbcdb.TBC_CORE_DEPT_SCORE_FACT group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_ITEM_NOTE_FACT'as table_name,count(*),dw_day from tbcdb.TBC_CORE_ITEM_NOTE_FACT group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_EVAL_COMMENT_FACT'as table_name,count(*),dw_day from tbcdb.TBC_CORE_EVAL_COMMENT_FACT group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_EVAL_TYPE_DET_FACT'as table_name,count(*),dw_day from tbcdb.TBC_CORE_EVAL_TYPE_DET_FACT group by dw_day order by dw_day desc limit 1;
+select 'TBC_CORE_EVAL_FACT'as table_name,count(*),dw_day from tbcdb.TBC_CORE_EVAL_FACT group by dw_day order by dw_day desc limit 1;
+
+
+
+*****************************QAFS VALIDATION************************
+No data-lake process for this sub-area
+1.Check fact and cat tables for latest run date
+SELECT 'qafs_hd_radio_value_fact' as table_name,count(*),date(updt_tmstmp) as date FROM tbcdb.qafs_hd_radio_value_fact group by date order by date DESC limit 1
+SELECT 'QAFS_HD_FACT'as table_name,count(*),date(updt_tmstmp) as date FROM tbcdb.QAFS_HD_FACT group by date order by date DESC limit 1
+SELECT 'QAFS_HOTLINE_QUES_ANS_FACT'as table_name,count(*),date(last_updt_timestamp) as date FROM tbcdb.QAFS_HOTLINE_QUES_ANS_FACT group by date order by date DESC limit 1
+SELECT 'QAFS_PEST_CNTRL_INCIDENT_FACT'as table_name,count(*),date(last_updt_timestamp) as date FROM tbcdb.QAFS_PEST_CNTRL_INCIDENT_FACT group by date order by date DESC limit 1
+SELECT 'QAFS_PEST_CNTRL_INCIDENT_DETAIL'as table_name,count(*),date(last_updt_timestamp) as date  from tbcdb.QAFS_PEST_CNTRL_INCIDENT_DETAIL group by date order by date DESC limit 1
+SELECT 'QAFS_HOTLINE_INCIDENT_CAT'as table_name,count(*),date(last_updt_timestamp) as date FROM tbcdb.QAFS_HOTLINE_INCIDENT_CAT group by date order by date DESC limit 1
+SELECT 'QAFS_HOTLINE_HDR'as table_name,count(*),date(last_updt_timestamp) as date FROM tbcdb.QAFS_HOTLINE_HDR group by date order by date DESC limit 1
+ 
+ 
+ 
+****************************TBE SALES-TRANSACTION******************** 
+1.Need Sid's input on data-lake process 
+
+2.Base & Fact table count checks
+
+select 'd_sales_fact' as table_name,count(*),dw_day from tbcdb.d_sales_fact group by dw_day order by dw_day  desc limit 1
+select 'd_comp_sales_agg1' as table_name,count(*),dw_day from tbcdb.d_comp_sales_agg1 group by dw_day order by dw_day  desc limit 1
+select 'D_H_SALES_FACT' as table_name,count(*),dw_day from tbcdb.D_H_SALES_FACT group by dw_day order by dw_day  desc limit 1
+select 'FW_COMP_SALES_AGG1' as table_name,count(*),dw_fiscal_wk from tbcdb.FW_COMP_SALES_AGG1 group by dw_fiscal_wk order by dw_fiscal_wk  desc limit 2
+select 'fw_dp_comp_sales_agg1' as table_name,count(*),dw_fiscal_wk from tbcdb.fw_dp_comp_sales_agg1 group by dw_fiscal_wk order by dw_fiscal_wk  desc limit 2
+select 'fw_sales_agg1' as table_name,count(*),dw_fiscal_wk from tbcdb.fw_sales_agg1 group by dw_fiscal_wk order by dw_fiscal_wk  desc limit 2
+select 'fw_dp_sales_agg1' as table_name,count(*),dw_fiscal_wk from tbcdb.fw_sales_agg1 group by dw_fiscal_wk order by dw_fiscal_wk  desc limit 2
+select 'FP_SALES_AGG1' as table_name,count(*),dw_fiscal_prd from tbcdb.FP_SALES_AGG1 group by dw_fiscal_prd order by dw_fiscal_prd  desc limit 2
+select 'FP_DP_SALES_AGG1' as table_name,count(*),dw_fiscal_prd from tbcdb.FP_DP_SALES_AGG1 group by dw_fiscal_prd order by dw_fiscal_prd  desc limit 2
+select 'fp_h_sales_agg1' as table_name,count(*),dw_fiscal_prd from tbcdb.fp_h_sales_agg1 group by dw_fiscal_prd order by dw_fiscal_prd  desc limit 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
